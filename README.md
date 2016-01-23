@@ -14,6 +14,8 @@ botとcliのどっちがいいんだろ。まよう。
 
 # Usage
 
+## KPT
+
 ```bash
 $ ganbaruzoi knowhow -r (register)
 > Name: ****** （e.g. キーワード）
@@ -44,33 +46,48 @@ $ ganbaruzoi
 > アクション：「*************」
 ```
 
+## GTD
+
 ```bash
-$ ganbaruzoi daily (日報) alias: ganbatta
+$ ganbaruozi addtodo
+> ******************************* 2 12:00(優先度)
+> *********************** 3 14:00(時刻)
+> ********************************** 1 [Enter]
+
+> じゃあやることは
+> 1. --------------- (優先度ソート)
+> 2. ---------------
+> 3. ---------------
+だね！
+
+$ ganbaruzoi todolist
+> 1. -----------------
+> 略
+
+$ ganbaruzoi todoupdate
+> ************* 2 15:00
+> ***************** 2 17:00
+> ****************** 3 18:00
+```
+
+
+
+## Reporting
+
+```bash
+$ ganbaruzoi ganbatta
 > Day: 20160101
 > Content: ************************* (なんかここmarkdownできないのかなあ)
 
-$ ganbaruzoi lastday (昨日の日報表示)
-> Day: 20151231
-> Content: ************************** (markdownなら、githubの該当するmdの画面に飛ぶ)
-
-$ ganbaruzoi weekly （週報）alias: sugoi_ganbatta
-$ ganbaruzoi lastweek （先週の週報）
-```
-
-```bash
-$ ganbaruzoi post_slack nippo （登録されてるslackに最新の日報なげる）
-$ ganbaruzoi post_slack syuuho （登録されてるslackに最新の週報なげる）
-$ ganbaruzoi slack -l
-```
-
-```bash
-$ ganbaruzoi timakin todo add
-> Task title: ********
-> Due: *********
-> Goal: ************
-
-$ ganbaruzoi timakin todo list
-$ ganbaruzoi timakin todo 
+$ ganbaruzoi sugoi_ganbatta (週報)
 ```
 
 基本、registerしたものはgithub上の{user_name}/reportリポジトリか何かにpushされる。
+小出しの振り返りでOK。塵も積もれば山となる感じの週報とかがいいかも。
+
+## Hot topic
+
+```bash
+$ ganbaruzoi news
+定期的にホットトピックを流してくれる。
+```
