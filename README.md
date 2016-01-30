@@ -1,6 +1,4 @@
 # ganbaruzoi
-ライフハックがんばるぞい！
-
 ![20140930223157.jpg](https://qiita-image-store.s3.amazonaws.com/0/16301/f96b29f6-c05c-969a-49ce-55ad5db5a5a2.jpeg "20140930223157.jpg")
 
 # Motivation
