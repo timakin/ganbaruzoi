@@ -1,6 +1,25 @@
 module.exports = (robot) ->
-    robot.hear /test/i, (res) ->
-        res.send "test!"
+    robot.hear /add知見 (.*)/i, (res) ->
+        knowhow = res.match[1]
+        res.send "Outline: #{knowhow}"
+    robot.hear /add問題意識 (.*)/, (res) ->
+        problem = res.match[1]
+        res.send "Outline: #{problem}"
+    robot.hear /add取り組み (.*)/, (res) ->
+        action = res.match[1]
+        res.send "Outline: #{action}"
+    robot.hear /がんばるぞい！/, (res) ->
+        res.send "がんばるぞい！"
+    robot.hear /やるぞい！/, (res) ->
+        res.send "やるぞい！"
+    robot.hear /やるぞい！/, (res) ->
+        res.send "やるぞい！"
+
+
+
+
+
+
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
