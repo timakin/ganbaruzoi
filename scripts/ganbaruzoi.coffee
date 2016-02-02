@@ -1,20 +1,27 @@
 module.exports = (robot) ->
-    robot.hear /add知見 (.*)/i, (res) ->
+    robot.respond /add知見 (.*)/i, (res) ->
         knowhow = res.match[1]
         res.send "Outline: #{knowhow}"
-    robot.hear /add問題意識 (.*)/, (res) ->
+        robot.brain.set 'knowhow', knowhow
+        // ここら辺で知見をどっかに保存する
+    robot.respond /add問題意識 (.*)/, (res) ->
         problem = res.match[1]
         res.send "Outline: #{problem}"
-    robot.hear /add取り組み (.*)/, (res) ->
+        robot.brain.set 'problem', problem
+    robot.respond /add取り組み (.*)/, (res) ->
         action = res.match[1]
         res.send "Outline: #{action}"
-    robot.hear /がんばるぞい！/, (res) ->
-        res.send "がんばるぞい！"
-    robot.hear /やるぞい！/, (res) ->
+        robot.brain.set 'action', action
+    robot.respond /がんばるぞい！/, (res) ->
+        unless (robot.brain.get('problem') && robot.brain.get('action'))
+            res.send "課題とアクションを決めよう！"
+            return
+        res.send "今日も1日がんばるぞい！"
+        res.send "https://pbs.twimg.com/media/BnXPzvmCEAAGHsj.png"
+        res.send "今週の課題: 「" + robot.brain.get('problem') + "」"
+        res.send "アクション: 「" + robot.brain.get('action') + "」"
+    robot.respond /やるぞい！/, (res) ->
         res.send "やるぞい！"
-    robot.hear /やるぞい！/, (res) ->
-        res.send "やるぞい！"
- 
 
 
 
