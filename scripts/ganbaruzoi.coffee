@@ -14,7 +14,7 @@ module.exports = (robot) ->
         res.send "やるぞい！"
     robot.hear /やるぞい！/, (res) ->
         res.send "やるぞい！"
-
+ 
 
 
 
