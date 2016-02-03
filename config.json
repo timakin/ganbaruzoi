@@ -1,0 +1,14 @@
+{
+    "github": {
+        "user": {
+            "name": "",
+            "password": ""
+        },
+        "client": {
+            "id": "",
+            "secret": ""
+        },
+        "reportRepository": "",
+        "accessToken": ""
+    }
+}
