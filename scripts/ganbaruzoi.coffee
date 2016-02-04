@@ -1,3 +1,5 @@
+jsonManager = require '../lib/jsonManager'
+
 module.exports = (robot) ->
     robot.respond /add知見 (.*)/i, (res) ->
         knowhow = res.match[1]
@@ -8,6 +10,7 @@ module.exports = (robot) ->
         problem = res.match[1]
         res.send "Outline: #{problem}"
         robot.brain.set 'problem', problem
+        jsonManager.recordToJson('problem', problem)
         # jsonに文字列を残す
     robot.respond /add取り組み (.*)/, (res) ->
         action = res.match[1]
@@ -17,6 +20,8 @@ module.exports = (robot) ->
     robot.respond /がんばるぞい！/, (res) ->
         unless (robot.brain.get('problem') && robot.brain.get('action') && robot.brain.get('schedule'))
             res.send "課題とアクション、今日の予定を決めよう！"
+            res.send "課題の追加方法: @がんばるぞいbot add問題意識 あれこれ"
+            res.send "アクションの追加方法: @がんばるぞいbot add取り組み あれこれ"
             return
         res.send "今日も1日がんばるぞい！"
         res.random [
@@ -30,6 +35,10 @@ module.exports = (robot) ->
         res.send "http://cdn-ak.f.st-hatena.com/images/fotolife/h/hetyo525/20140710/20140710232703.jpg"
         # jsonからデータを読み取って日報をmarkdownで作成
         # git push
+        # 成功したらjsonファイルのknowhow, 
+    robot.respond /すごいがんばった/, (res) ->
+        res.send "http://p.twpl.jp/show/large/O5ihi"
+        # 週報を作る
     robot.respond /やるぞい (.*)/, (res) ->
         unless (robot.brain.get('schedule'))
             robot.brain.set 'schedule', res.match[1]
