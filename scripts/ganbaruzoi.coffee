@@ -20,7 +20,7 @@ module.exports = (robot) ->
         robot.brain.set 'action', action
         jsonManager.record('action', action)
 
-    robot.respons /やった (.*)/, (res) ->
+    robot.respond /やった (.*)/, (res) ->
         report = res.match[1]
         res.send "https://pbs.twimg.com/media/B6FfGXfCYAABlDA.jpg:large"
 
@@ -75,7 +75,7 @@ module.exports = (robot) ->
         res.send "https://pbs.twimg.com/media/BspTkipCIAE4a0n.jpg:medium"
         res.send "今日の予定！"
         res.send schedule
-        jsonManager.record('schedule', schedule);
+        jsonManager.record('schedule', schedule)
 
     robot.respond /やっぱこっちやる (.*)/, (res) ->
         res.random [
