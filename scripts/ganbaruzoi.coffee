@@ -1,4 +1,4 @@
-jm = require '../lib/jsonManager'
+jsonManager = require '../lib/jsonManager'
 rg = require '../lib/reportGenerator'
 
 module.exports = (robot) ->
@@ -6,19 +6,19 @@ module.exports = (robot) ->
         knowhow = res.match[1]
         res.send "Outline: #{knowhow}"
         robot.brain.set 'knowhow', knowhow
-        jm.recordToJson('knowhow', knowhow)
+        jsonManager.record('knowhow', knowhow)
 
     robot.respond /add問題意識 (.*)/, (res) ->
         problem = res.match[1]
         res.send "Outline: #{problem}"
         robot.brain.set 'problem', problem
-        jm.recordToJson('problem', problem)
+        jsonManager.record('problem', problem)
 
     robot.respond /add取り組み (.*)/, (res) ->
         action = res.match[1]
         res.send "Outline: #{action}"
         robot.brain.set 'action', action
-        jm.recordToJson('action', action)
+        jsonManager.record('action', action)
 
     robot.respons /やった (.*)/, (res) ->
         report = res.match[1]
@@ -28,7 +28,7 @@ module.exports = (robot) ->
         date = ("0"+now.getHours().toString()).slice(-2) + ("0"+now.getMinutes().toString()).slice(-2)
         json = {}
         json[date] = report
-        jm.recordToJson('reports', json)
+        jsonManager.record('reports', json)
 
     robot.respond /がんばるぞい！/, (res) ->
         unless (robot.brain.get('problem') && robot.brain.get('action') && robot.brain.get('schedule'))
@@ -51,17 +51,17 @@ module.exports = (robot) ->
         res.send robot.brain.get('schedule')
         now = new Date()
         date = now.getFullYear().toString() + ("0"+(now.getMonth() + 1).toString()).slice(-2) + ("0"+now.getDate().toString()).slice(-2)
-        jm.recordToJson('date', date)
+        jsonManager.record('date', date)
 
     robot.respond /ふりかえり (.*)/, (res) ->
-        jm.recordToJson('reviews', res.match[1])
+        jsonManager.record('reviews', res.match[1])
 
     robot.respond /がんばった (.*)/, (res) ->
         res.send "http://cdn-ak.f.st-hatena.com/images/fotolife/h/hetyo525/20140710/20140710232703.jpg"
         rg.generateDailyReport()
         # git pushと、push結果取得
-        jm.recordToJson('reports', report)
-        jm.dailyCleanUpJson()
+        jsonManager.record('reports', report)
+        jsonManager.dailyCleanUp()
 
     robot.respond /すごいがんばった/, (res) ->
         res.send "http://p.twpl.jp/show/large/O5ihi"
@@ -75,7 +75,7 @@ module.exports = (robot) ->
         res.send "https://pbs.twimg.com/media/BspTkipCIAE4a0n.jpg:medium"
         res.send "今日の予定！"
         res.send schedule
-        jm.recordToJson('schedule', schedule);
+        jsonManager.record('schedule', schedule);
 
     robot.respond /やっぱこっちやる (.*)/, (res) ->
         res.random [
@@ -94,4 +94,4 @@ module.exports = (robot) ->
 
         rescheduleJson = {}
         rescheduleJson[date] = reschedule
-        jm.recordToJson('reschedules', rescheduleJson);
+        jsonManager.record('reschedules', rescheduleJson)
