@@ -1,4 +1,4 @@
-# <%= json.date %>_日報
+<h1><%= json.date %>_日報</h1>
 
 ## 課題とアクション
 
@@ -20,33 +20,35 @@
 
 <% for (var i = 0; i < json.reschedules.length; i++) { %>
 	<% for (key in json.reschedules[i]) { %>
-
-<%= i %>. <%= key %>
-```
-<%= json.reschedules[i][key] %>
-```
-
+		<h4><%= key %></h4>
+		<p><%= json.reschedules[i][key] %></p>
 	<% } %>
 <% } %>
 
 ## 今日やったこと
 
+<ul>
 <% for (var i = 0; i < json.reports.length; i++) { %>
 	<% for (key in json.reports[i]) { %>
-- <%= key %>: <%= json.reports[i][key] %>
+		<li><%= key %>: <%= json.reports[i][key] %></li>
 	<% } %>
 <% } %>
+</ul>
 
 ## たまった知見
 
+<ul>
 <% for (var i = 0; i < json.knowhow.length; i++) { %>
 	<% for (key in json.knowhow[i]) { %>
-- <%= key %>: <%= json.knowhow[i][key] %>
+		<li><%= key %>: <%= json.knowhow[i][key] %></li>
 	<% } %>
 <% } %>
+</ul>
 
 ## 振り返り
 
+<ul>
 <% for (var i = 0; i < json.reviews.length; i++) { %>
-- <%= json.reviews[i] %>
+	<li><%= json.reviews[i] %></li>
 <% } %>
+</ul>

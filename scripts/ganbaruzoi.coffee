@@ -25,7 +25,7 @@ module.exports = (robot) ->
         res.send "https://pbs.twimg.com/media/B6FfGXfCYAABlDA.jpg:large"
 
         now = new Date()
-        date = ("0"+now.getHours().toString()).slice(-2) + ("0"+now.getMinutes().toString()).slice(-2)
+        date = ("0"+now.getHours().toString()).slice(-2) + ":" + ("0"+now.getMinutes().toString()).slice(-2)
         json = {}
         json[date] = report
         jsonManager.record('reports', json)
@@ -56,12 +56,12 @@ module.exports = (robot) ->
     robot.respond /ふりかえり (.*)/, (res) ->
         jsonManager.record('reviews', res.match[1])
 
-    robot.respond /がんばった (.*)/, (res) ->
+    robot.respond /がんばった/, (res) ->
         res.send "http://cdn-ak.f.st-hatena.com/images/fotolife/h/hetyo525/20140710/20140710232703.jpg"
         rg.generateDailyReport()
         # git pushと、push結果取得
-        jsonManager.record('reports', report)
-        jsonManager.dailyCleanUp()
+        # jsonManager.record('reports', report)
+        # jsonManager.dailyCleanUp()
 
     robot.respond /すごいがんばった/, (res) ->
         res.send "http://p.twpl.jp/show/large/O5ihi"
@@ -86,11 +86,11 @@ module.exports = (robot) ->
             "https://pbs.twimg.com/media/BspWaPYCAAAI6Ui.jpg",
             "http://pbs.twimg.com/media/BtcSIHmCUAA8Prp.jpg"
         ]
-        reschedules = res.match[1]
-        robot.brain.set 'reschedules', reschedules
+        reschedule = res.match[1]
+        robot.brain.set 'reschedules', reschedule
 
         now = new Date()
-        date = now.getFullYear().toString() + ("0"+(now.getMonth() + 1).toString()).slice(-2) + ("0"+now.getDate().toString()).slice(-2) + " " + ("0"+now.getHours().toString()).slice(-2) + ("0"+now.getMinutes().toString()).slice(-2)
+        date = now.getFullYear().toString() + ("0"+(now.getMonth() + 1).toString()).slice(-2) + ("0"+now.getDate().toString()).slice(-2) + " " + ("0"+now.getHours().toString()).slice(-2) + ":" + ("0"+now.getMinutes().toString()).slice(-2)
 
         rescheduleJson = {}
         rescheduleJson[date] = reschedule
