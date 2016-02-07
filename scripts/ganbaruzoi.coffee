@@ -60,7 +60,6 @@ module.exports = (robot) ->
         res.send "http://cdn-ak.f.st-hatena.com/images/fotolife/h/hetyo525/20140710/20140710232703.jpg"
         rg.generateDailyReport()
         # git pushと、push結果取得
-        # jsonManager.record('reports', report)
         jsonManager.dailyCleanUp()
 
     robot.respond /すごいがんばった/, (res) ->
