@@ -62,11 +62,12 @@ module.exports = (robot) ->
         # reportsをクリーンアップ
 
     robot.respond /やる (.*)/, (res) ->
-        schedule = res.match[1]
-        unless (robot.brain.get('schedule'))
-            robot.brain.set 'schedule', schedule
-        res.send "< #{schedule}"
-        jsonManager.record('schedule', schedule)
+        timing   = res.match[1]
+        schedule = res.match[2]
+        json = {}
+        json[timing] = schedule
+        res.send "< #{timing}: #{schedule}"
+        jsonManager.record('schedules', json)
 
     robot.respond /みなおし (.*)/, (res) ->
         res.random "http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png"
