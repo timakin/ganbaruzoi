@@ -61,7 +61,7 @@ module.exports = (robot) ->
         rg.generateDailyReport()
         # git pushと、push結果取得
         # jsonManager.record('reports', report)
-        # jsonManager.dailyCleanUp()
+        jsonManager.dailyCleanUp()
 
     robot.respond /すごいがんばった/, (res) ->
         res.send "http://p.twpl.jp/show/large/O5ihi"
