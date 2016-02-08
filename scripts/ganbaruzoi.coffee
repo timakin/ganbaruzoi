@@ -61,7 +61,7 @@ module.exports = (robot) ->
         # 週報を作る
         # reportsをクリーンアップ
 
-    robot.respond /やる (.*)/, (res) ->
+    robot.respond /やる (.*) (.*)/, (res) ->
         timing   = res.match[1]
         schedule = res.match[2]
         json = {}
@@ -70,13 +70,12 @@ module.exports = (robot) ->
         jsonManager.record('schedules', json)
 
     robot.respond /みなおし (.*)/, (res) ->
-        res.random "http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png"
+        res.send "http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png"
         reschedule = res.match[1]
         robot.brain.set 'reschedules', reschedule
 
         now = new Date()
         date = now.getFullYear().toString() + ("0"+(now.getMonth() + 1).toString()).slice(-2) + ("0"+now.getDate().toString()).slice(-2) + " " + ("0"+now.getHours().toString()).slice(-2) + ":" + ("0"+now.getMinutes().toString()).slice(-2)
-
         rescheduleJson = {}
         rescheduleJson[date] = reschedule
         jsonManager.record('reschedules', rescheduleJson)
