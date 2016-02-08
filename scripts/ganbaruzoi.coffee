@@ -39,7 +39,7 @@ module.exports = (robot) ->
             return
 
         res.send "今日も1日がんばるぞい！"
-        res.random "https://pbs.twimg.com/media/BnXPzvmCEAAGHsj.png"
+        res.send "https://pbs.twimg.com/media/BnXPzvmCEAAGHsj.png"
         res.send "今週の課題: 「" + robot.brain.get('problem') + "」"
         res.send "アクション: 「" + robot.brain.get('action') + "」"
         res.send "今日の予定！"
