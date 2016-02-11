@@ -4,30 +4,34 @@
 
 ### 課題
 
-<%= problem %>
+<strong><%= problem %></strong>
 
 ### アクション
 
-<%= action %>
+<strong><%= action %></strong>
 
 ## 当初の予定
 
-<ul>
-<% for (var i = 0; i < schedules.length; i++) { %>
-    <% for (key in schedules[i]) { %>
-<li><p><%= key %>: <%= reschedules[i][key] %></p></li>
-    <% } %>
-<% } %>
-</ul>
-
-
-<%= schedule %>
+<table>
+  	<tr>
+    	<th>時間帯</th>
+    	<th>内容</th>
+  	</tr>
+  	<% for (var i = 0; i < schedules.length; i++) { %>
+    	<% for (key in schedules[i]) { %>
+  			<tr>
+    			<td><%= key %></td>
+    			<td><%= schedules[i][key] %></td>
+  			</tr>
+    	<% } %>
+	<% } %>
+</table>
 
 ## 予定のアップデート
 
 <% for (var i = 0; i < reschedules.length; i++) { %>
     <% for (key in reschedules[i]) { %>
-<h4><%= key %></h4>
+<blockquote><%= key %></blockquote>
 <p><%= reschedules[i][key] %></p>
     <% } %>
 <% } %>
@@ -44,16 +48,17 @@
 
 ## たまった知見
 
-<ul>
+<pre>
 <% for (var i = 0; i < knowhow.length; i++) { %>
-    <li><%= knowhow[i] %></li>
+> <%= knowhow[i] %>
 <% } %>
-</ul>
+</pre>
 
 ## 振り返り
 
-<ul>
+
+<pre>
 <% for (var i = 0; i < reviews.length; i++) { %>
-    <li><%= reviews[i] %></li>
+> <%= reviews[i] %>
 <% } %>
-</ul>
+</pre>
