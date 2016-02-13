@@ -4,6 +4,7 @@ const jsonManager = require('../lib/jsonManager');
 const rg = require('../lib/reportGenerator');
 const gh = require('../lib/githubClient');
 const is = require('is_js');
+const repl = require('../lib/repl');
 
 module.exports = (robot => {
     robot.respond(/add知見 (.*)/i, res => {
@@ -79,6 +80,18 @@ module.exports = (robot => {
         jsonManager.record('schedules', json);        
     });
 
+    robot.hear(/(.*)\s*$/i, res => {
+        if (is.falsy(robot.interactive_mode)) {
+            return;
+        } else {
+            res.send(robot.repl.next(res.match[0]).value);
+        }
+    });
+
+    robot.respond(/てすと/, res => {
+        robot.repl = repl.test(robot);
+        res.send(robot.repl.next().value);
+    });
 
     robot.respond(/みなおし (.*)/, res => {
         res.send("http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png");
