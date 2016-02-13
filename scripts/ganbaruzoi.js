@@ -75,22 +75,22 @@ module.exports = (robot => {
         // reportsをクリーンアップ
     });
 
-    // repl化
+    // repl
     robot.respond(/やるぞい/, res => {
         robot.repl = repl.inputSchedule(robot);
         res.send(robot.repl.next().value);     
     });
 
-    // repl化
+    // repl
     robot.respond(/みなおし/, res => {
         res.send("http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png");
         robot.repl = repl.reschedule(robot);
         res.send(robot.repl.next().value);
     });
 
-    // repl化
-    robot.respond(/ふりかえり (.*)/, res => {
-        jsonManager.record('reviews', res.match[1]);
-        res.send("< ${res.match[1]}");
+    // repl
+    robot.respond(/ふりかえり/, res => {
+        robot.repl = repl.review(robot);
+        res.send(robot.repl.next().value);
     });
 });
