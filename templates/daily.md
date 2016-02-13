@@ -31,8 +31,12 @@
 
 <% for (var i = 0; i < reschedules.length; i++) { %>
     <% for (key in reschedules[i]) { %>
-<blockquote><%= key %></blockquote>
-<p><%= reschedules[i][key] %></p>
+      <blockquote><%= key %></blockquote>
+      <% for (var j = 0; j < reschedules[i][key].length; j++) { %>
+        <% for (rescheduleKey in reschedules[i][key][j]) { %>
+          <p><%= rescheduleKey %><%= reschedules[i][key][j][rescheduleKey] %></p>
+        <% } %>
+      <% } %>
     <% } %>
 <% } %>
 

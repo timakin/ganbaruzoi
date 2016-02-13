@@ -7,6 +7,15 @@ const is = require('is_js');
 const repl = require('../lib/repl');
 
 module.exports = (robot => {
+    robot.hear(/(.*)\s*$/i, res => {
+        if (is.falsy(robot.interactive_mode)) {
+            return;
+        } else {
+            // repl input
+            res.send(robot.repl.next(res.match[0]).value);
+        }
+    });
+
     robot.respond(/add知見 (.*)/i, res => {
         let knowhow = res.match[1];
         res.send("< ${knowhow}");
@@ -55,11 +64,6 @@ module.exports = (robot => {
     });
 
 
-    robot.respond(/ふりかえり (.*)/, res => {
-        jsonManager.record('reviews', res.match[1]);
-        res.send("< ${res.match[1]}");
-    });
-
     robot.respond(/がんばった/, res => {
         res.send("http://cdn-ak.f.st-hatena.com/images/fotolife/h/hetyo525/20140710/20140710232703.jpg");
         rg.generateDailyReport();        
@@ -71,35 +75,22 @@ module.exports = (robot => {
         // reportsをクリーンアップ
     });
 
-    robot.respond(/やる (.*) (.*)/, res => {
-        let timing   = res.match[1];
-        let schedule = res.match[2];
-        let json     = {};
-        json[timing] = schedule;
-        res.send("< ${timing}: ${schedule}");
-        jsonManager.record('schedules', json);        
+    // repl化
+    robot.respond(/やるぞい/, res => {
+        robot.repl = repl.inputSchedule(robot);
+        res.send(robot.repl.next().value);     
     });
 
-    robot.hear(/(.*)\s*$/i, res => {
-        if (is.falsy(robot.interactive_mode)) {
-            return;
-        } else {
-            res.send(robot.repl.next(res.match[0]).value);
-        }
-    });
-
-    robot.respond(/てすと/, res => {
-        robot.repl = repl.test(robot);
+    // repl化
+    robot.respond(/みなおし/, res => {
+        res.send("http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png");
+        robot.repl = repl.reschedule(robot);
         res.send(robot.repl.next().value);
     });
 
-    robot.respond(/みなおし (.*)/, res => {
-        res.send("http://40.media.tumblr.com/a3826719c41437631facb8218737a5e1/tumblr_naokwa7AN01rk8zp8o8_500.png");
-        let reschedule = res.match[1];
-        let now        = new Date();
-        let date       = ("0"+now.getHours().toString()).slice(-2) + ":" + ("0"+now.getMinutes().toString()).slice(-2);
-        let rescheduleJson   = {};
-        rescheduleJson[date] = reschedule;
-        jsonManager.record('reschedules', rescheduleJson);
+    // repl化
+    robot.respond(/ふりかえり (.*)/, res => {
+        jsonManager.record('reviews', res.match[1]);
+        res.send("< ${res.match[1]}");
     });
 });
