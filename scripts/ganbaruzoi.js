@@ -18,25 +18,25 @@ module.exports = (robot => {
 
     robot.respond(/add知見 (.*)/i, res => {
         let knowhow = res.match[1];
-        res.send("< ${knowhow}");
+        res.send("< " + knowhow);
         jsonManager.record('knowhow', knowhow);
     })
 
     robot.respond(/add問題意識 (.*)/, res => {
         let problem = res.match[1];
-        res.send("< ${problem}");
+        res.send("< " + problem);
         jsonManager.record('problem', problem);
     });
 
     robot.respond(/add取り組み (.*)/, res => {
         let action = res.match[1];
-        res.send("< #{action}");
+        res.send("< " + action);
         jsonManager.record('action', action);
     });
 
     robot.respond(/やった (.*)/, res => {
         let report = res.match[1];
-        res.send("< ${report}");
+        res.send("< " + report);
         res.send("https://pbs.twimg.com/media/B6FfGXfCYAABlDA.jpg:large");
         let now    = new Date();
         let date   = ("0"+now.getHours().toString()).slice(-2) + ":" + ("0"+now.getMinutes().toString()).slice(-2);
@@ -54,8 +54,8 @@ module.exports = (robot => {
             } else {
                 res.send("< 今日も1日がんばるぞい！");
                 res.send("https://pbs.twimg.com/media/BnXPzvmCEAAGHsj.png");
-                res.send("今週の課題: 「${body.problem}」");
-                res.send("アクション: 「${body.action}」");
+                res.send("今週の課題: 「" + body.problem + "」");
+                res.send("アクション: 「" + body.action + "」");
                 let now  = new Date();
                 let date = now.getFullYear().toString() + ("0"+(now.getMonth() + 1).toString()).slice(-2) + ("0"+now.getDate().toString()).slice(-2);
                 jsonManager.record('date', date);       

@@ -32,11 +32,22 @@
 <% for (var i = 0; i < reschedules.length; i++) { %>
     <% for (key in reschedules[i]) { %>
       <blockquote><%= key %></blockquote>
-      <% for (var j = 0; j < reschedules[i][key].length; j++) { %>
-        <% for (rescheduleKey in reschedules[i][key][j]) { %>
-          <p><%= rescheduleKey %><%= reschedules[i][key][j][rescheduleKey] %></p>
+
+      <table>
+        <tr>
+          <th>時間帯</th>
+          <th>内容</th>
+        </tr>
+        <% for (var j = 0; j < reschedules[i][key].length; j++) { %>
+          <% for (rescheduleKey in reschedules[i][key][j]) { %>
+            <tr>
+              <td><%= rescheduleKey %></td>
+              <td><%= reschedules[i][key][j][rescheduleKey] %></td>
+            </tr>
+          <% } %>
         <% } %>
-      <% } %>
+      </table>
+
     <% } %>
 <% } %>
 
