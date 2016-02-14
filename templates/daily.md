@@ -32,7 +32,6 @@
 <% for (var i = 0; i < reschedules.length; i++) { %>
     <% for (key in reschedules[i]) { %>
       <blockquote><%= key %></blockquote>
-
       <table>
         <tr>
           <th>時間帯</th>
@@ -47,7 +46,6 @@
           <% } %>
         <% } %>
       </table>
-
     <% } %>
 <% } %>
 
