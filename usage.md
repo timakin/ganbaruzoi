@@ -46,7 +46,7 @@ $ git commit -m '[fix] basic settings'
 $ git push heroku master
 
 $ heroku login
-$ heroku create xxxx_report
+$ heroku create xxxx-report
 $ heroku ps:scale web=1
 $ heroku addons:add rediscloud
 
@@ -54,6 +54,8 @@ $ heroku config:add HUBOT_SLACK_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 $ heroku config:add HUBOT_SLACK_TEAM=teamname
 $ heroku config:add HUBOT_SLACK_BOTNAME=ganbaruzoi
 $ heroku config:add HEROKU_URL=http://xxx.herokuapp.com
+$ heroku addons:create newrelic:wayne
+$ heroku config:set NEW_RELIC_APP_NAME=xxxx-report
 ```
 
 ### 4. ganbaruzoiにメンションする

@@ -1,4 +1,5 @@
 "use strict";
+require('newrelic');
 
 const jsonManager = require('../lib/jsonManager');
 const rg = require('../lib/reportGenerator');

@@ -23,6 +23,7 @@
     "jsonfile": "^2.2.3",
     "lodash": "^4.2.1",
     "markedejs": "^0.1.0",
+    "newrelic": "^1.25.1",
     "octonode": "^0.7.4",
     "to-markdown": "^2.0.1"
   },
